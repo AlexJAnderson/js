@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <style>
+            body 
+            {
+                font-family:fantasy;
+                user-select: none;
+            }
+            p
+            {
+                background-color: plum;
+                cursor: pointer;
+                width: 200px;
+                position: fixed;
+                left:100;
+                top:200;
+                
+                /* overflow:hidden; */
+            }
+        </style>
+    </head>
+    <body id="body"> 
+        <h1>
+            top text!
+        </h1>
+        <p id="welcome">
+            welcome to application!
+        </p>
+        hello world 2xx
+    </body>
+</html>
+
+
+<script type="module">
+
+    var dragging = false;
+    function onmousedown(event)
+    {
+        console.log("onmousedown");
+        var p = document.getElementById("welcome");
+        p.innerText = "down";
+        dragging = true;
+        event.preventDefault();
+    }
+
+    function onmouseup(event)
+    {
+        alert("mouse up")
+        console.log("onmouseup");
+        var p = document.getElementById("welcome");
+        p.innerText = "up";
+        dragging = false;
+        event.preventDefault();
+    }
+
+    function onmousemove(event)
+    {
+        console.log("onmousemove dragging=" + dragging);
+        console.log("onmousemove x=" + event.clientX);
+        console.log("onmousemove y=" + event.clientY);
+
+        if(dragging)
+        {
+            var p = document.getElementById("welcome");
+            p.innerText = "moving";
+            p.style.top = event.clientY;
+            p.style.left = event.clientX;
+        }
+
+        event.preventDefault();
+    }
+
+    document.getElementById("welcome").addEventListener("mousedown", onmousedown);
+    document.getElementById("welcome").addEventListener("mouseup", onmouseup);
+    document.getElementById("welcome").addEventListener("mousemove", onmousemove);
+
+</script>
