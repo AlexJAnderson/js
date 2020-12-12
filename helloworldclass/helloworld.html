@@ -6,7 +6,7 @@
                 font-family:fantasy;
                 user-select: none;
             }
-            p
+            p 
             {
                 background-color: plum;
                 cursor: pointer;
@@ -14,60 +14,53 @@
                 position: fixed;
                 left:100;
                 top:200;
-                
-                /* overflow:hidden; */
+            }
+            button
+            {
+                background-color: aquamarine;
             }
         </style>
     </head>
+
+    <script type="module">
+        import {Quotes} from "./Quotes.mjs";
+        var quotes = new Quotes();
+        var q = document.getElementById("quote");
+        q.innerText = quotes.getNextQuote();
+        var dragging = false;
+        
+        function onButtonClick(event)
+        {
+            var p = document.getElementById("button");
+            q.innerText = quotes.getNextQuote();
+        }
+        
+        function addNewQuote()
+        {
+            var adding = document.getElementById("nquote");
+            quotes.addQuote(adding.value);
+        }
+    
+        document.getElementById("button").addEventListener("click", onButtonClick);
+        document.getElementById("nquotebutton").addEventListener("click", addNewQuote)
+
+    
+    </script>
     <body id="body"> 
         <h1>
             top text!
         </h1>
-        <p id="welcome">
-            drag me!
-        </p>
-        drag the pink text
+    
+        <div id="quote">
+            quote of the day here
+        </div>
+        <button type="button" id="button">
+            click for a new quote
+        </button>
+        <div> 
+            <label for="nquote">New Quote:</label>
+            <input type="text" id="nquote">
+            <input type="button" id="nquotebutton" value="Submit">
+        </div>
     </body>
 </html>
-
-
-<script type="module">
-
-    var dragging = false;
-    function onmousedown(event)
-    {
-        console.log("onmousedown");
-        var p = document.getElementById("welcome");
-        p.innerText = "down";
-        dragging = true;
-    }
-
-    function onmouseup(event)
-    {
-        console.log("onmouseup");
-        var p = document.getElementById("welcome");
-        p.innerText = "up";
-        dragging = false;
-    }
-
-    function onmousemove(event)
-    {
-        console.log("onmousemove dragging=" + dragging);
-        console.log("onmousemove x=" + event.clientX);
-        console.log("onmousemove y=" + event.clientY);
-
-        if(dragging)
-        {
-            var p = document.getElementById("welcome");
-            p.innerText = "moving";
-            p.style.top = event.clientY;
-            p.style.left = event.clientX;
-        }
-
-    }
-
-    document.getElementById("body").addEventListener("mousedown", onmousedown);
-    document.getElementById("body").addEventListener("mouseup", onmouseup);
-    document.getElementById("body").addEventListener("mousemove", onmousemove);
-
-</script>
