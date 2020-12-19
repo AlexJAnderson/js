@@ -5,8 +5,10 @@ export class Quotes {
             {"text": "put a proper quote here"},
             {"text": "sometimes you should"},
             {"text": "quote 3"},
+            {"text": "hello there"},
         ];
         this.index = 0;
+        this.initialLength = this.quotes.length;
     }
 
     getNextQuote()
@@ -21,5 +23,13 @@ export class Quotes {
     addQuote(quoteToAdd)
     {
         this.quotes.push({"text": quoteToAdd});
+    }
+
+    removeQuotes()
+    {
+        this.quotes = this.quotes.splice(0, this.initialLength);
+        if(this.index > this.initialLength - 1)
+            this.index = 0;
+
     }
 }

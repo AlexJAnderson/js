@@ -17,7 +17,11 @@
             }
             button
             {
-                background-color: aquamarine;
+                background-color: springgreen;
+            }
+            .reset
+            {
+                background-color: red;
             }
         </style>
     </head>
@@ -27,22 +31,28 @@
         var quotes = new Quotes();
         var q = document.getElementById("quote");
         q.innerText = quotes.getNextQuote();
-        var dragging = false;
         
         function onButtonClick(event)
         {
             var p = document.getElementById("button");
             q.innerText = quotes.getNextQuote();
-        }
+        } 
         
         function addNewQuote()
         {
             var adding = document.getElementById("nquote");
             quotes.addQuote(adding.value);
         }
+
+        function resetQuotes()
+        {
+            quotes.removeQuotes();
+            onButtonClick();
+        }
     
         document.getElementById("button").addEventListener("click", onButtonClick);
-        document.getElementById("nquotebutton").addEventListener("click", addNewQuote)
+        document.getElementById("nquotebutton").addEventListener("click", addNewQuote);
+        document.getElementById("reset").addEventListener("click", resetQuotes);
 
     
     </script>
@@ -54,13 +64,18 @@
         <div id="quote">
             quote of the day here
         </div>
-        <button type="button" id="button">
+            <button type="button" id="button">
             click for a new quote
         </button>
         <div> 
             <label for="nquote">New Quote:</label>
             <input type="text" id="nquote">
-            <input type="button" id="nquotebutton" value="Submit">
+            <button id="nquotebutton">submit</button>
+        </div>
+        <div>
+            <button type="button" id="reset" class="reset">
+                reset
+            </button>
         </div>
     </body>
 </html>
